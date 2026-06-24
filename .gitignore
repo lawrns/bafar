@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+videos_scratch/
+cv_analysis/
+yolov8n.pt
+.ipynb_checkpoints/
+*.jpg
+*.png
+node_modules/
+.next/
+.DS_Store
+.system_generated/
