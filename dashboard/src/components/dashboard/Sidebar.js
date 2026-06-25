@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export default function Sidebar({ currentView, setView, pendN }) {
+export default function Sidebar({ currentView, setView, pendN, mobileOpen }) {
   const navItems = [
     { id: "resumen", label: "Resumen Operativo", icon: (
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -59,7 +59,7 @@ export default function Sidebar({ currentView, setView, pendN }) {
   ];
 
   return (
-    <aside style={{ width: "248px", flex: "none", borderRight: "1px solid var(--border-color)", background: "var(--bg-sidebar)", display: "flex", flexDirection: "column" }}>
+    <aside className={"bf-os-sidebar" + (mobileOpen ? " bf-os-open" : "")} style={{ width: "248px", flex: "none", borderRight: "1px solid var(--border-color)", background: "var(--bg-sidebar)", display: "flex", flexDirection: "column" }}>
       {/* Header */}
       <div style={{ padding: "20px 18px 16px", borderBottom: "1px solid var(--border-color)" }}>
         <div onClick={() => setView("landing")} style={{ display: "flex", alignItems: "center", gap: "11px", cursor: "pointer" }} title="Volver a Inicio">

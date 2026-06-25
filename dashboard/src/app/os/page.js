@@ -137,6 +137,11 @@ const OS_RESPONSIVE_CSS = `
   .bf-os-hide-sm { display: none !important; }
   .bf-os-content { padding: 18px 14px 40px !important; }
   .bf-kpis { grid-template-columns: repeat(2, 1fr) !important; }
+  .bf-kpis6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .bf-split2 { grid-template-columns: 1fr !important; }
+  .bf-flow { overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+  .bf-flow > div { flex: 0 0 auto !important; }
+  .bf-flow > div > div { min-width: 124px; }
 }
 `;
 
@@ -875,12 +880,12 @@ export default function Home() {
             <button onClick={() => handleSetView("acc")} style={{ display: "flex", alignItems: "center", gap: "7px", padding: "6px 13px", borderRadius: "20px", border: allPendingActions.length > 0 ? "1px solid #EBB6AC" : "1px solid #CFE3D6", background: allPendingActions.length > 0 ? "rgba(239, 68, 68, 0.15)" : "rgba(34, 197, 94, 0.15)", color: allPendingActions.length > 0 ? "#ef4444" : "#22c55e", fontSize: "12px", fontWeight: 700 }}>
               {allPendingActions.length > 0 ? `${allPendingActions.length} acciones pendientes` : "Sin alertas"}
             </button>
-            <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>Chihuahua · La Piedad · Sabinas · El Paso</span>
+            <span className="bf-os-hide-sm" style={{ fontSize: "12px", color: "var(--text-muted)" }}>Chihuahua · La Piedad · Sabinas · El Paso</span>
           </div>
         </header>
 
         {/* Scrollable View Content */}
-        <main style={{ flex: 1, overflowY: "auto", padding: "26px 30px 46px" }}>
+        <main className="bf-os-content" style={{ flex: 1, overflowY: "auto", padding: "26px 30px 46px" }}>
           
           {/* 1. Resumen Tab */}
           {view === "resumen" && (
@@ -909,7 +914,7 @@ export default function Home() {
                   <button onClick={() => handleSetView("acc")} className="magnetic-btn" style={{ padding: "7px 14px", borderRadius: "8px", border: "none", background: "var(--accent)", color: "#fff", fontSize: "12px", fontWeight: 600 }}>Revisar →</button>
                 </div>
               )}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
+              <div className="bf-kpis" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
                 {plantasKpis.map((k, idx) => (
                   <SpotlightCard key={idx} style={{ padding: "15px 16px", borderRadius: "12px" }}>
                     <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, position: "relative", zIndex: 2 }}>{k.k}</div>
@@ -952,7 +957,7 @@ export default function Home() {
                   <button onClick={() => handleSetView("acc")} className="magnetic-btn" style={{ padding: "7px 14px", borderRadius: "8px", border: "none", background: "var(--accent)", color: "#fff", fontSize: "12px", fontWeight: 600 }}>Revisar →</button>
                 </div>
               )}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
+              <div className="bf-kpis" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
                 {transpKpis.map((k, idx) => (
                   <SpotlightCard key={idx} style={{ padding: "15px 16px", borderRadius: "12px" }}>
                     <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, position: "relative", zIndex: 2 }}>{k.k}</div>
@@ -998,7 +1003,7 @@ export default function Home() {
                   <button onClick={() => handleSetView("acc")} className="magnetic-btn" style={{ padding: "7px 14px", borderRadius: "8px", border: "none", background: "var(--accent)", color: "#fff", fontSize: "12px", fontWeight: 600 }}>Revisar →</button>
                 </div>
               )}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
+              <div className="bf-kpis" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
                 {calidadKpis.map((k, idx) => (
                   <SpotlightCard key={idx} style={{ padding: "15px 16px", borderRadius: "12px" }}>
                     <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, position: "relative", zIndex: 2 }}>{k.k}</div>
@@ -1069,7 +1074,7 @@ export default function Home() {
                   <button onClick={() => handleSetView("acc")} className="magnetic-btn" style={{ padding: "7px 14px", borderRadius: "8px", border: "none", background: "var(--accent)", color: "#fff", fontSize: "12px", fontWeight: 600 }}>Revisar →</button>
                 </div>
               )}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
+              <div className="bf-kpis" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
                 {invKpis.map((k, idx) => (
                   <SpotlightCard key={idx} style={{ padding: "15px 16px", borderRadius: "12px" }}>
                     <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, position: "relative", zIndex: 2 }}>{k.k}</div>
@@ -1111,7 +1116,7 @@ export default function Home() {
                   <button onClick={() => handleSetView("acc")} className="magnetic-btn" style={{ padding: "7px 14px", borderRadius: "8px", border: "none", background: "var(--accent)", color: "#fff", fontSize: "12px", fontWeight: 600 }}>Revisar →</button>
                 </div>
               )}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
+              <div className="bf-kpis" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
                 {retailKpis.map((k, idx) => (
                   <SpotlightCard key={idx} style={{ padding: "15px 16px", borderRadius: "12px" }}>
                     <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, position: "relative", zIndex: 2 }}>{k.k}</div>
@@ -1153,7 +1158,7 @@ export default function Home() {
                   <button onClick={() => handleSetView("acc")} className="magnetic-btn" style={{ padding: "7px 14px", borderRadius: "8px", border: "none", background: "var(--accent)", color: "#fff", fontSize: "12px", fontWeight: 600 }}>Revisar →</button>
                 </div>
               )}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
+              <div className="bf-kpis" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "18px" }}>
                 {comprasKpis.map((k, idx) => (
                   <SpotlightCard key={idx} style={{ padding: "15px 16px", borderRadius: "12px" }}>
                     <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, position: "relative", zIndex: 2 }}>{k.k}</div>

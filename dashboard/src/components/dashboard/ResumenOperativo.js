@@ -26,7 +26,7 @@ export default function ResumenOperativo({
       </div>
 
       {/* Sites Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "14px", marginBottom: "18px" }}>
+      <div className="bf-kpis" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "14px", marginBottom: "18px" }}>
         {sites && sites.map((s, idx) => (
           <SpotlightCard key={idx} style={{ padding: "17px 18px", borderRadius: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}>
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "8px", position: "relative", zIndex: 2 }}>
@@ -65,7 +65,7 @@ export default function ResumenOperativo({
         <div style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.05em", color: "var(--text-muted)", marginBottom: "16px", position: "relative", zIndex: 2 }}>
           FLUJO DE PROCESO COMPLETO (DESDE GANADERÍA HASTA RETAIL)
         </div>
-        <div style={{ display: "flex", alignItems: "stretch", position: "relative", zIndex: 2 }}>
+        <div className="bf-flow" style={{ display: "flex", alignItems: "stretch", position: "relative", zIndex: 2 }}>
           {flow && flow.map((fl, idx) => (
             <div key={idx} style={{ display: "flex", alignItems: "center", flex: 1, minWidth: 0 }}>
               <div style={{
@@ -96,7 +96,7 @@ export default function ResumenOperativo({
       </SpotlightCard>
 
       {/* KPI Strip */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "12px", marginBottom: "18px" }}>
+      <div className="bf-kpis6" style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "12px", marginBottom: "18px" }}>
         {resumenKpis && resumenKpis.map((k, idx) => (
           <SpotlightCard key={idx} style={{ padding: "15px 16px", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}>
             <div style={{ fontSize: "10.5px", color: "var(--text-muted)", letterSpacing: "0.03em", fontWeight: 600, lineHeight: 1.25, height: "26px", position: "relative", zIndex: 2 }}>
@@ -113,7 +113,7 @@ export default function ResumenOperativo({
       </div>
 
       {/* Split section */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", alignItems: "start" }}>
+      <div className="bf-split2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", alignItems: "start" }}>
         {/* Actions Pending Mini list */}
         <SpotlightCard style={{ padding: "18px 20px", borderRadius: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "13px", position: "relative", zIndex: 2 }}>
