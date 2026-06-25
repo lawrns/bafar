@@ -56,6 +56,83 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ============================================================= */
+/* BAFAR OS Home (landing) — keyframes ported from the design     */
+/* ============================================================= */
+@keyframes bfmarquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes bfconvey {
+  0% { transform: translateX(452px); }
+  100% { transform: translateX(-150px); }
+}
+@keyframes bfbox {
+  0%, 33% { opacity: 0; }
+  41%, 59% { opacity: 1; }
+  67%, 100% { opacity: 0; }
+}
+@keyframes bfscan {
+  0% { transform: translateY(8px); opacity: 0; }
+  12% { opacity: .85; }
+  88% { opacity: .85; }
+  100% { transform: translateY(230px); opacity: 0; }
+}
+@keyframes bfdraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes bfblink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .2; }
+}
+@keyframes bfbar {
+  0% { transform: scaleY(.35); }
+  100% { transform: scaleY(1); }
+}
+
+/* Scroll-reveal helper used by the home sections */
+.bf-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+}
+.bf-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.bf-home a:focus-visible,
+.bf-home button:focus-visible {
+  outline: 2px solid var(--ac, #C0392B);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.bf-home ::selection {
+  background: #C0392B;
+  color: #fff;
+}
+
+/* Respect users who prefer reduced motion: disable/short-circuit every
+   home-page animation and reveal transition. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .bf-home *,
+  .bf-home *::before,
+  .bf-home *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .bf-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Ensure the cold-chain SVG line is drawn fully when motion is off. */
+  .bf-home [data-bfdraw] {
+    stroke-dashoffset: 0 !important;
+  }
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
