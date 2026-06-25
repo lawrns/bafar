@@ -12,7 +12,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 
 const ONBOARDING_DATA = {
   resumen: {
-    image: "/images/onboarding_resumen.png",
+    image: "/images/onboarding_resumen.svg",
     title: "Torre de Control · Ganadería & Corral",
     desc: "Vista global unificada de la cadena de suministro de Grupo BAFAR. Desde la recepción de ganado en corral hasta el embarque final.",
     bullets: [
@@ -22,7 +22,7 @@ const ONBOARDING_DATA = {
     ]
   },
   plantas: {
-    image: "/images/onboarding_plantas.png",
+    image: "/images/onboarding_plantas.svg",
     title: "Plantas y Plan de Producción (OEE)",
     desc: "Supervisión de las 17 líneas de producción y el Plan Maestro de Demanda para SKU de embutidos, jamón Parma y empaque al vacío.",
     bullets: [
@@ -32,7 +32,7 @@ const ONBOARDING_DATA = {
     ]
   },
   transp: {
-    image: "/images/onboarding_transporte.png",
+    image: "/images/onboarding_transporte.svg",
     title: "Logística & Cadena de Frío",
     desc: "Monitoreo satelital y térmico de la flota refrigerada en tránsito nacional y exportaciones hacia El Paso, Texas.",
     bullets: [
@@ -42,7 +42,7 @@ const ONBOARDING_DATA = {
     ]
   },
   calidad: {
-    image: "/images/onboarding_calidad.png",
+    image: "/images/onboarding_calidad.svg",
     title: "Aseguramiento de Calidad & Inocuidad",
     desc: "Inspección de especificaciones físicas y microbiológicas bajo la norma TIF / USDA. Liberación y retención de lotes.",
     bullets: [
@@ -52,7 +52,7 @@ const ONBOARDING_DATA = {
     ]
   },
   vision: {
-    image: "/images/onboarding_vision.png",
+    image: "/images/onboarding_vision.svg",
     title: "Visión Artificial (Edge YOLOv8)",
     desc: "Monitoreo inteligente con cámaras industriales de alta velocidad y modelos YOLOv8 corriendo localmente en el nodo Edge.",
     bullets: [
@@ -62,7 +62,7 @@ const ONBOARDING_DATA = {
     ]
   },
   inv: {
-    image: "/images/onboarding_inventario.png",
+    image: "/images/onboarding_inventario.svg",
     title: "CEDIS & Gestión de Inventarios (FEFO)",
     desc: "Control de inventario en los centros de distribución fríos de Chihuahua, La Piedad, Sabinas y El Paso.",
     bullets: [
@@ -72,7 +72,7 @@ const ONBOARDING_DATA = {
     ]
   },
   retail: {
-    image: "/images/onboarding_retail.png",
+    image: "/images/onboarding_retail.svg",
     title: "Retail y Puntos de Venta (CarneMart)",
     desc: "Desempeño comercial y abasto de las tiendas CarneMart y BIF a nivel nacional.",
     bullets: [
@@ -82,7 +82,7 @@ const ONBOARDING_DATA = {
     ]
   },
   compras: {
-    image: "/images/onboarding_compras.png",
+    image: "/images/onboarding_compras.svg",
     title: "Compras de Commodities & Cobertura FX",
     desc: "Estrategia de cobertura financiera de materias primas (cerdo CME, maíz CBOT) y tipo de cambio (USD/MXN).",
     bullets: [
@@ -92,7 +92,7 @@ const ONBOARDING_DATA = {
     ]
   },
   acc: {
-    image: "/images/onboarding_calidad.png",
+    image: "/images/onboarding_calidad.svg",
     title: "Acciones & Autorización de Seguridad",
     desc: "Centro de firmas humanas para autorizar cambios y bloqueos en las líneas operativas en tiempo real.",
     bullets: [
@@ -121,10 +121,30 @@ const INITIAL_FEED = [
   {t:'06:52:09',a:'COMPRAS',m:'Señal de cobertura en cerdo magro · a revisión',c:'#f59e0b'}
 ];
 
+// Mobile shell rules for the operational console. The console is a fixed
+// desktop layout (248px sidebar + main); on phones the sidebar becomes an
+// off-canvas drawer (hamburger toggle), the verbose header items hide, and
+// the 4-up KPI grids drop to 2-up. Injected as a scoped <style>.
+const OS_RESPONSIVE_CSS = `
+.bf-os-burger { display: none; }
+.bf-os-backdrop { display: none; }
+@media (max-width: 820px) {
+  .bf-os-sidebar { position: fixed !important; top: 0; left: 0; bottom: 0; z-index: 200; transform: translateX(-100%); transition: transform .25s ease; box-shadow: 0 18px 50px rgba(0,0,0,.28); }
+  .bf-os-sidebar.bf-os-open { transform: translateX(0); }
+  .bf-os-backdrop.is-open { display: block; position: fixed; inset: 0; z-index: 150; background: rgba(0,0,0,.45); }
+  .bf-os-burger { display: inline-flex !important; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-main); font-size: 18px; line-height: 1; cursor: pointer; flex: none; }
+  .bf-os-header { padding: 0 14px !important; }
+  .bf-os-hide-sm { display: none !important; }
+  .bf-os-content { padding: 18px 14px 40px !important; }
+  .bf-kpis { grid-template-columns: repeat(2, 1fr) !important; }
+}
+`;
+
 export default function Home() {
   // App States — /os boots straight into the operational console;
   // the public landing page now lives at "/" (BAFAR OS Home).
   const [view, setView] = useState("resumen");
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [pending, setPending] = useState(INITIAL_PENDING);
   const [resolved, setResolved] = useState([]);
   const [clock, setClock] = useState("");
@@ -257,6 +277,7 @@ export default function Home() {
   // Tab switching wrapper
   const handleSetView = (newView) => {
     setView(newView);
+    setMobileNavOpen(false);
     if (newView !== "landing") {
       checkOnboarding(newView);
     }
@@ -811,12 +832,15 @@ export default function Home() {
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh", width: "100%", background: "var(--bg-primary)", color: "var(--text-main)", overflow: "hidden" }}>
+    <div className="bf-os-root" style={{ display: "flex", height: "100vh", width: "100%", background: "var(--bg-primary)", color: "var(--text-main)", overflow: "hidden" }}>
+      <style>{OS_RESPONSIVE_CSS}</style>
       {/* Sidebar navigation */}
-      <Sidebar currentView={view} setView={handleSetView} pendN={allPendingActions.length} />
+      <Sidebar currentView={view} setView={handleSetView} pendN={allPendingActions.length} mobileOpen={mobileNavOpen} />
+      {/* Mobile drawer backdrop */}
+      <div className={"bf-os-backdrop" + (mobileNavOpen ? " is-open" : "")} onClick={() => setMobileNavOpen(false)} />
 
       {/* Main panel container */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+      <div className="bf-os-main" style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
         {/* Live Commodities Marquee Ticker */}
         <div className="ticker-wrap">
           <div className="ticker">
@@ -834,15 +858,16 @@ export default function Home() {
         </div>
 
         {/* Page Header */}
-        <header style={{ height: "58px", flex: "none", borderBottom: "1px solid var(--border-color)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 26px", background: "var(--bg-sidebar)" }}>
+        <header className="bf-os-header" style={{ height: "58px", flex: "none", borderBottom: "1px solid var(--border-color)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 26px", background: "var(--bg-sidebar)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <button className="bf-os-burger" onClick={() => setMobileNavOpen(true)} aria-label="Abrir menú">☰</button>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#22c55e" }} className="animate-pulse-custom" />
               <span style={{ fontSize: "11.5px", fontWeight: 700, letterSpacing: "0.06em", color: "#22c55e" }}>OPERANDO</span>
             </div>
-            <span style={{ fontSize: "12.5px", color: "var(--text-muted)" }}>Operación nacional · Turno A</span>
-            <span style={{ fontSize: "12px", color: "#3f3f46" }}>·</span>
-            <span style={{ fontFamily: "IBM Plex Mono", fontSize: "12.5px", color: "var(--text-muted)" }}>{clock}</span>
+            <span className="bf-os-hide-sm" style={{ fontSize: "12.5px", color: "var(--text-muted)" }}>Operación nacional · Turno A</span>
+            <span className="bf-os-hide-sm" style={{ fontSize: "12px", color: "#3f3f46" }}>·</span>
+            <span className="bf-os-hide-sm" style={{ fontFamily: "IBM Plex Mono", fontSize: "12.5px", color: "var(--text-muted)" }}>{clock}</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
             <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "12.5px", fontWeight: 600, color: "var(--text-muted)", textDecoration: "none" }} title="Volver a BAFAR OS Home">← Inicio</Link>
