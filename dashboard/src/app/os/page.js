@@ -12,7 +12,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 
 const ONBOARDING_DATA = {
   resumen: {
-    image: "/images/onboarding_resumen.svg",
+    image: "/images/onboarding_resumen.png",
     title: "Torre de Control · Ganadería & Corral",
     desc: "Vista global unificada de la cadena de suministro de Grupo BAFAR. Desde la recepción de ganado en corral hasta el embarque final.",
     bullets: [
@@ -22,17 +22,17 @@ const ONBOARDING_DATA = {
     ]
   },
   plantas: {
-    image: "/images/onboarding_plantas.svg",
+    image: "/images/onboarding_plantas.png",
     title: "Plantas y Plan de Producción (OEE)",
     desc: "Supervisión de las 17 líneas de producción y el Plan Maestro de Demanda para SKU de embutidos, jamón Parma y empaque al vacío.",
     bullets: [
-      "Control de OEE y ritmo de unidades procesadas por minuto.",
+      "Control de OEE and ritmo de unidades procesadas por minuto.",
       "Ajuste dinámico frente a desviaciones de pronóstico (MAPE).",
       "Alertas TIF por sobre-producción o mermas fuera de tolerancia."
     ]
   },
   transp: {
-    image: "/images/onboarding_transporte.svg",
+    image: "/images/onboarding_transporte.png",
     title: "Logística & Cadena de Frío",
     desc: "Monitoreo satelital y térmico de la flota refrigerada en tránsito nacional y exportaciones hacia El Paso, Texas.",
     bullets: [
@@ -42,7 +42,7 @@ const ONBOARDING_DATA = {
     ]
   },
   calidad: {
-    image: "/images/onboarding_calidad.svg",
+    image: "/images/onboarding_calidad.png",
     title: "Aseguramiento de Calidad & Inocuidad",
     desc: "Inspección de especificaciones físicas y microbiológicas bajo la norma TIF / USDA. Liberación y retención de lotes.",
     bullets: [
@@ -52,7 +52,7 @@ const ONBOARDING_DATA = {
     ]
   },
   vision: {
-    image: "/images/onboarding_vision.svg",
+    image: "/images/onboarding_vision.png",
     title: "Visión Artificial (Edge YOLOv8)",
     desc: "Monitoreo inteligente con cámaras industriales de alta velocidad y modelos YOLOv8 corriendo localmente en el nodo Edge.",
     bullets: [
@@ -62,7 +62,7 @@ const ONBOARDING_DATA = {
     ]
   },
   inv: {
-    image: "/images/onboarding_inventario.svg",
+    image: "/images/onboarding_inventario.png",
     title: "CEDIS & Gestión de Inventarios (FEFO)",
     desc: "Control de inventario en los centros de distribución fríos de Chihuahua, La Piedad, Sabinas y El Paso.",
     bullets: [
@@ -72,7 +72,7 @@ const ONBOARDING_DATA = {
     ]
   },
   retail: {
-    image: "/images/onboarding_retail.svg",
+    image: "/images/onboarding_retail.png",
     title: "Retail y Puntos de Venta (CarneMart)",
     desc: "Desempeño comercial y abasto de las tiendas CarneMart y BIF a nivel nacional.",
     bullets: [
@@ -82,7 +82,7 @@ const ONBOARDING_DATA = {
     ]
   },
   compras: {
-    image: "/images/onboarding_compras.svg",
+    image: "/images/onboarding_compras.png",
     title: "Compras de Commodities & Cobertura FX",
     desc: "Estrategia de cobertura financiera de materias primas (cerdo CME, maíz CBOT) y tipo de cambio (USD/MXN).",
     bullets: [
@@ -92,7 +92,7 @@ const ONBOARDING_DATA = {
     ]
   },
   acc: {
-    image: "/images/onboarding_calidad.svg",
+    image: "/images/onboarding_calidad.png",
     title: "Acciones & Autorización de Seguridad",
     desc: "Centro de firmas humanas para autorizar cambios y bloqueos en las líneas operativas en tiempo real.",
     bullets: [
