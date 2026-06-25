@@ -189,6 +189,7 @@ export default function VisionPanel() {
 
       {/* floating authorization chip */}
       <div
+        className="bf-float-chip"
         style={{
           position: "absolute",
           left: "-26px",
