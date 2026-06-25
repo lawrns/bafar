@@ -56,6 +56,199 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ============================================================= */
+/* BAFAR OS Home (landing) — keyframes ported from the design     */
+/* ============================================================= */
+@keyframes bfmarquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes bfconvey {
+  0% { transform: translateX(452px); }
+  100% { transform: translateX(-150px); }
+}
+@keyframes bfbox {
+  0%, 33% { opacity: 0; }
+  41%, 59% { opacity: 1; }
+  67%, 100% { opacity: 0; }
+}
+@keyframes bfscan {
+  0% { transform: translateY(8px); opacity: 0; }
+  12% { opacity: .85; }
+  88% { opacity: .85; }
+  100% { transform: translateY(230px); opacity: 0; }
+}
+@keyframes bfdraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes bfblink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .2; }
+}
+@keyframes bfbar {
+  0% { transform: scaleY(.35); }
+  100% { transform: scaleY(1); }
+}
+
+/* Scroll-reveal helper used by the home sections */
+.bf-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+}
+.bf-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================= */
+/* Cinematic hero choreography + premium motion primitives        */
+/* ============================================================= */
+
+/* Top scroll-progress hairline */
+.bf-scrollbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--ac, #C0392B), #E8623F 60%, #F0A28A);
+  z-index: 200;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Staggered entrance for any element inside a primed hero. The parent toggles
+   `.is-in`; each child reads its own --d delay. */
+.bf-anim {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--d, 0s);
+  will-change: opacity, transform;
+}
+.is-in .bf-anim {
+  opacity: 1;
+  transform: none;
+}
+
+/* Word-mask reveal — the signature hero headline moment. Each word sits in an
+   overflow-clipped box; the inner glyph rises from below, staggered. */
+.bf-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.04em;
+}
+.bf-word > span {
+  display: inline-block;
+  transform: translateY(112%);
+  transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0s);
+  will-change: transform;
+}
+.is-in .bf-word > span {
+  transform: none;
+}
+
+/* Living Vision hero: sweeping scan line, detection-box lock-on, camera pan */
+@keyframes bfscanhero {
+  0%   { top: 3%;  opacity: 0; }
+  7%   { opacity: 0.85; }
+  93%  { opacity: 0.85; }
+  100% { top: 94%; opacity: 0; }
+}
+@keyframes bfboxglow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(95,208,138,0); }
+  50%      { box-shadow: 0 0 14px 0 rgba(95,208,138,0.28); }
+}
+@keyframes bfdefectglow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224,58,41,0); }
+  50%      { box-shadow: 0 0 16px 0 rgba(224,58,41,0.40); }
+}
+@keyframes bfchipin {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.bf-detbox {
+  position: absolute;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(1.18);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.bf-detbox.is-locked {
+  opacity: 1;
+  transform: scale(1);
+}
+.bf-cam {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Vision-panel showpiece: 3D perspective stage + subtle float at rest */
+.bf-tilt-stage {
+  perspective: 1100px;
+}
+.bf-tilt {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+@keyframes bffloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.bf-float-chip {
+  animation: bffloat 5.5s ease-in-out infinite;
+}
+
+.bf-home a:focus-visible,
+.bf-home button:focus-visible {
+  outline: 2px solid var(--ac, #C0392B);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.bf-home ::selection {
+  background: #C0392B;
+  color: #fff;
+}
+
+/* Respect users who prefer reduced motion: disable/short-circuit every
+   home-page animation and reveal transition. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .bf-home *,
+  .bf-home *::before,
+  .bf-home *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .bf-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Force every cinematic primitive into its resolved (visible) state. */
+  .bf-home .bf-anim,
+  .bf-home .bf-word > span {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .bf-scrollbar { display: none !important; }
+  .bf-float-chip { animation: none !important; }
+  /* Ensure the cold-chain SVG line is drawn fully when motion is off. */
+  .bf-home [data-bfdraw] {
+    stroke-dashoffset: 0 !important;
+  }
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 8px;

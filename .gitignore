@@ -12,3 +12,7 @@ node_modules/
 .next/
 .DS_Store
 .system_generated/
+
+# Local Netlify folder
+.netlify
+
