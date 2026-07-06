@@ -18,16 +18,15 @@ import json
 
 import requests
 
-# --- Credentials (env first, then known demo defaults) ----------------------
+# --- Credentials (env-only; no hardcoded fallback — this repo is public) ----
 ENDPOINT = os.environ.get("APPWRITE_ENDPOINT", "https://nyc.cloud.appwrite.io/v1").rstrip("/")
 PROJECT_ID = os.environ.get("APPWRITE_PROJECT_ID", "69fa0779002b02b00ec1")
-API_KEY = os.environ.get(
-    "APPWRITE_API_KEY",
-    "standard_258415855e52f69c8f94c9fa7541976a0427d19e7663e0b7fb44a17f7fa0d118"
-    "96702fc8d05c5a38b0717b1051cc6cdbad43a83d71f0a2eb1e70e9e3d4b0c5e8f1208d107"
-    "ba140366c608332096e2d990ca28edbbf9e81075ae90eb5fa76173dd589bbed1c04d70d5b"
-    "71165d703b01359724f885194553c568a959463669c113",
-)
+API_KEY = os.environ.get("APPWRITE_API_KEY")
+if not API_KEY:
+    raise RuntimeError(
+        "APPWRITE_API_KEY is not set. Set it in your shell/venv env — "
+        "this key must never be hardcoded in source (this repo is public)."
+    )
 
 DB_ID = "bafar_os"
 COL_EVENTS = "detection_events"

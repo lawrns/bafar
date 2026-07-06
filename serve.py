@@ -16,16 +16,15 @@ import re
 import time
 import threading
 
-# --- Appwrite credentials (the server key lives ONLY here / in env) ---------
+# --- Appwrite credentials (env-only; no hardcoded fallback — repo is public) -
 os.environ.setdefault("APPWRITE_ENDPOINT", "https://nyc.cloud.appwrite.io/v1")
 os.environ.setdefault("APPWRITE_PROJECT_ID", "69fa0779002b02b00ec1")
-os.environ.setdefault(
-    "APPWRITE_API_KEY",
-    "standard_258415855e52f69c8f94c9fa7541976a0427d19e7663e0b7fb44a17f7fa0d118"
-    "96702fc8d05c5a38b0717b1051cc6cdbad43a83d71f0a2eb1e70e9e3d4b0c5e8f1208d107"
-    "ba140366c608332096e2d990ca28edbbf9e81075ae90eb5fa76173dd589bbed1c04d70d5b"
-    "71165d703b01359724f885194553c568a959463669c113",
-)
+if not os.environ.get("APPWRITE_API_KEY"):
+    raise RuntimeError(
+        "APPWRITE_API_KEY is not set. Set it in your shell/venv env before "
+        "running serve.py — this key must never be hardcoded in source "
+        "(this repo is public)."
+    )
 
 import mjpeg_server
 import appwrite_db
